@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/sge.css">
+    <title>¿Qué es un SGE?</title>
+</head>
+<body>
+    <header id="header">
+        Sitio Web con información sobre Insalación y Uso de un SGE
+    </header>
+
+    <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+    </div>
+
+    <nav id="nav">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="sge.html">¿Qué es un SGE?</a></li>
+            <li><a href="Odoo.html">SGE: "Odoo" </a></li>
+            <li><a href="instalacion.html">Instalación</a></li>
+            <li><a href="admin.html">Administración y configuración</a></li>
+            <li><a href="seguridad.html">Acceso seguro</a></li>
+            <li><a href="informes.html">Informes y exportación</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1>¿Qué es un SGE?</h1>
+        <p>Un Sistema de Gestión Empresarial (SGE), tambien conocido como sistema ERP (Planificacion de Recursos Empresariales), es un sistema de informacion que
+            integra las diversas areas que tiene una empresa para lograr facilitar y optimizar toda la gestion de sus operaciones; o por lo menos la mayor parte. </p>
+        <h2>Tipos de SGE</h2>
+        <p> Los tipos de SGE son herramientas que ayudan a las empresas a gestionar sectores de sus operaciones como recursos humanos, finanzas...
+            <br> unos cuantos tipos de SGE tipicos y populares son: </p>
+        <ul>
+            <li>ERP (Enterprise Resource Planning): <br> Sistema integrado que gestiona recursos y procesos clave de una empresa.</li> <br>
+            <li>CRM (Customer Relationship Management): <br> Software para administrar relaciones con clientes y mejorar ventas.</li> <br>
+            <li>SGA (Sistema de Gestión de Almacenes): <br> Herramienta para optimizar la gestión de almacenes e inventarios.</li> <br>
+            <li>SGD (Sistema de Gestión Documental): <br> Solución para organizar, almacenar y recuperar documentos digitales.</li> <br>
+            <li>BPM (Business Process Management): <br> Metodología para analizar y automatizar procesos empresariales.</li> <br>
+            <li>BI (Business Intelligence): <br> Conjunto de herramientas para analizar datos y tomar decisiones estratégicas.</li> <br>
+        </ul>
+
+        <h2>Características</h2>
+        <ul>
+            <li>Integración: <br> Conectan múltiples áreas de la empresa en una única plataforma.</li> <br>
+            <li>Centralización: <br> Almacenan información en una base de datos accesible y organizada.</li> <br>
+            <li>Automatización: <br> Optimizan tareas repetitivas, mejorando la eficiencia.</li> <br>
+            <li>Análisis en tiempo real: <br> Proporcionan datos actualizados para decisiones rápidas.</li> <br>
+            <li>Adaptabilidad: <br> Se ajustan a las necesidades específicas de cada empresa.</li> <br>
+            <li>Escalabilidad: <br> Crecen con la empresa, añadiendo funciones según se requiera.</li> <br>
+            <li>Seguridad: <br> Protegen la información y garantizan privacidad.</li> <br>
+            <li> Soporte técnico: <br> Brindan asistencia y actualizaciones continuas.</li> <br>
+            <li>Acceso remoto y móvil: <br> Permiten gestionar datos desde cualquier lugar.</li> <br>
+            <li>Módulos funcionales: <br> Ofrecen herramientas especializadas para distintas áreas.</li> <br>
+        </ul>
+    </main>
+    <footer>
+        <div class="enlaces">
+            <a href="https://www.instagram.com/odoo.official/" target="_blank">Instagram</a>
+            <a href="https://twitter.com/odoo" target="_blank">Twitter</a>
+            <a href="https://www.facebook.com/Odoo" target="_blank">Facebook</a>
+            <a href="https://www.youtube.com/user/OpenERPonline" target="_blank">YouTube</a>
+            <a href="https://www.odoo.com/es_ES" target="_blank">Odoo</a>
+        </div>
+        <div class="botones-navegacion" id="botones-navegacion">
+            <button id="go-back" title="Página anterior">←</button>
+            <button id="go-forward" title="Página siguiente">→</button>
+        </div>
+    </footer>
+    <script>
+        let paginas = ["index.html", "sge.html", "odoo.html", "instalacion.html", "admin.html", "seguridad.html", "informes.html"];
+        let localizacion = window.location.pathname.split('/').pop().toLowerCase();
+        let idx = paginas.indexOf(localizacion);
+
+        document.getElementById('go-back').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let prevIdx = (idx - 1 + paginas.length) % paginas.length;
+                window.location.href = paginas[prevIdx];
+            }
+        };
+        document.getElementById('go-forward').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let nextIdx = (idx + 1) % paginas.length;
+                window.location.href = paginas[nextIdx];
+            }
+        };
+
+        const menuToggle = document.getElementById('mobile-menu');
+        const nav = document.querySelector('nav');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+        
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>

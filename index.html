@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/principal.css">
+    <title>Sistemas de Gestión Empresarial</title>
+</head>
+<body>
+    <header id="header">
+        Sitio Web con información sobre Insalación y Uso de un SGE
+    </header>
+
+    <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+    </div>
+
+    <nav id="nav">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="sge.html">¿Qué es un SGE?</a></li>
+            <li><a href="Odoo.html">SGE: "Odoo" </a></li>
+            <li><a href="instalacion.html">Instalación</a></li>
+            <li><a href="admin.html">Administración y configuración</a></li>
+            <li><a href="seguridad.html">Acceso seguro</a></li>
+            <li><a href="informes.html">Informes y exportación</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1>Sistemas de Gestión Empresarial</h1>
+        <img src="IMG/SGE.webp" alt="Empresa" class="img-empresa">
+
+        <br>
+
+        <p> En esta pagina web vamos a tocar distintos puntos acerca de los Sistemas de los Gestores Empresariales (SGE) para 
+            conocer mas acerca de ellos y conocer mas tambien del SGE que vamos a utilizar </p>
+
+        <br>
+        <br>
+    </main>
+    <footer>
+        <div class="enlaces">
+            <a href="https://www.instagram.com/odoo.official/" target="_blank">Instagram</a>
+            <a href="https://twitter.com/odoo" target="_blank">Twitter</a>
+            <a href="https://www.facebook.com/Odoo" target="_blank">Facebook</a>
+            <a href="https://www.youtube.com/user/OpenERPonline" target="_blank">YouTube</a>
+            <a href="https://www.odoo.com/es_ES" target="_blank">Odoo</a>
+        </div>
+        <div class="botones-navegacion" id="botones-navegacion">
+            <button id="go-back" title="Página anterior">←</button>
+            <button id="go-forward" title="Página siguiente">→</button>
+        </div>
+    </footer>
+    <script>
+        let paginas = ["index.html", "sge.html", "odoo.html", "instalacion.html", "admin.html", "seguridad.html", "informes.html"];
+        let localizacion = window.location.pathname.split('/').pop().toLowerCase();
+        let idx = paginas.indexOf(localizacion);
+
+        document.getElementById('go-back').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let prevIdx = (idx - 1 + paginas.length) % paginas.length;
+                window.location.href = paginas[prevIdx];
+            }
+        };
+        document.getElementById('go-forward').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let nextIdx = (idx + 1) % paginas.length;
+                window.location.href = paginas[nextIdx];
+            }
+        };
+
+        const menuToggle = document.getElementById('mobile-menu');
+        const nav = document.querySelector('nav');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+        
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>

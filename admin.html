@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/admin.css">
+    <title>Administración y configuración</title>
+</head>
+<body>
+    <header id="header">
+        Sitio Web con información sobre Insalación y Uso de un SGE
+    </header>
+
+    <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+    </div>
+
+    <nav id="nav">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="sge.html">¿Qué es un SGE?</a></li>
+            <li><a href="Odoo.html">SGE: "Odoo" </a></li>
+            <li><a href="instalacion.html">Instalación</a></li>
+            <li><a href="admin.html">Administración y configuración</a></li>
+            <li><a href="seguridad.html">Acceso seguro</a></li>
+            <li><a href="informes.html">Informes y exportación</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1>Administración y configuración</h1>
+        <p>En esta sección vamos a explicar la configuracion que tiene el sistema Odoo</p>
+
+        <h1> Pasos a seguir: </h1>
+
+        <img src="./IMG/Administracion-Configuracion_Odoo/Screenshot_1.png" alt="1">
+        <p> Una vez tengamos instalado nuestro SGE Odoo, arriba a la izquierda, al lado de la palabra aplicaciones vamos a encontrar un cuadrado conformado por min cuadraditos
+            donde al hacerle click nos mostrara los ajustes y al darle click nos llevara a la parte de ajustes generales </p>
+
+        <br>
+        <br>
+
+        <img src="./IMG/Administracion-Configuracion_Odoo/Screenshot_2.png" alt="2">
+        <img src="./IMG/Administracion-Configuracion_Odoo/Screenshot_3.png" alt="3">
+        <img src="./IMG/Administracion-Configuracion_Odoo/Screenshot_4.png" alt="4">
+        <img src="./IMG/Administracion-Configuracion_Odoo/Screenshot_5.png" alt="5">
+        <p> Podemos observar que se toman en serio lo de "Generales"
+            <br> Estas opciones nos permiten tocar todo de nuestro SGE Odoo de manera rapida y como bien dice, general </p>
+        
+        <p> Usuarios: </p>
+            <ul>
+                <li>Puedes invitar a nuevos usuarios al sistema ingresando su correo electrónico.</li>
+                <li>También puedes gestionar los usuarios activos, modificando permisos o eliminando accesos según sea necesario.</li>
+            </ul>
+        
+        <p> Idiomas: </p>
+            <ul>
+                <li>Si necesitas trabajar en varios idiomas, puedes agregar nuevos idiomas al sistema para adaptarlo a las necesidades de tu equipo o clientes.</li>
+            </ul>
+
+        <p> Compañias: </p>
+            <ul>
+                <li>Puedes actualizar la información de tu empresa, asegurando que los datos sean correctos.</li>
+                <li>Además, puedes configurar el diseño de los documentos oficiales para personalizarlos según tu marca.</li>
+            </ul>
+
+        <p> Contactos </p>
+            <ul>
+                <li>Existe la opción de enviar SMS directamente a los contactos registrados en tu base de datos.</li>
+                <li>También puedes autocompletar la información de los contactos con datos de la empresa, lo que facilita la gestión y mejora la precisión.</li>
+            </ul>
+
+        <p> Permisos </p>
+            <ul>
+                <li>Permisos de acceso por defecto: Define reglas de acceso personalizadas para nuevos usuarios.</li>
+                <li>Claves API: Permite a los usuarios conectarse a Odoo desde herramientas externas, especialmente con autenticación multifactor.</li>
+            </ul>
+
+        <p> Integraciones: </p>
+            <ul>
+                <li>Plugin de correo: Conecta Odoo con clientes de correo electrónico.</li>
+                <li>Autenticación OAuth: Permite a los usuarios iniciar sesión con cuentas externas (Google, Facebook...).</li>
+                <li>Biblioteca de imágenes de Unsplash: Accede a imágenes gratuitas en alta resolución desde Unsplash.</li>
+                <li>Autenticación LDAP: Facilita el acceso mediante credenciales LDAP.</li>
+                <li>Geolocalización: Ubica geográficamente a los contactos.</li>
+            </ul>
+
+        <p> Sobre: </p>
+        <p> Esto es simplemete un QR que nos lleva a la tienda de aplicaciones de nuestro telefono Android o Iphone para que descarguemos Odoo para dispositivos moviles </p>
+
+        <br>
+        <br>
+        
+    </main>
+    <footer>
+        <div class="enlaces">
+            <a href="https://www.instagram.com/odoo.official/" target="_blank">Instagram</a>
+            <a href="https://twitter.com/odoo" target="_blank">Twitter</a>
+            <a href="https://www.facebook.com/Odoo" target="_blank">Facebook</a>
+            <a href="https://www.youtube.com/user/OpenERPonline" target="_blank">YouTube</a>
+            <a href="https://www.odoo.com/es_ES" target="_blank">Odoo</a>
+        </div>
+        <div class="botones-navegacion" id="botones-navegacion">
+            <button id="go-back" title="Página anterior">←</button>
+            <button id="go-forward" title="Página siguiente">→</button>
+        </div>
+    </footer>
+    <script>
+        let paginas = ["index.html", "sge.html", "odoo.html", "instalacion.html", "admin.html", "seguridad.html", "informes.html"];
+        let localizacion = window.location.pathname.split('/').pop().toLowerCase();
+        let idx = paginas.indexOf(localizacion);
+
+        document.getElementById('go-back').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let prevIdx = (idx - 1 + paginas.length) % paginas.length;
+                window.location.href = paginas[prevIdx];
+            }
+        };
+        document.getElementById('go-forward').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let nextIdx = (idx + 1) % paginas.length;
+                window.location.href = paginas[nextIdx];
+            }
+        };
+
+        const menuToggle = document.getElementById('mobile-menu');
+        const nav = document.querySelector('nav');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+        
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>

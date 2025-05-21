@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/informes.css">
+    <title>Informes y exportación</title>
+</head>
+<body>
+    <header id="header">
+        Sitio Web con información sobre Insalación y Uso de un SGE
+    </header>
+
+    <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+    </div>
+
+    <nav id="nav">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="sge.html">¿Qué es un SGE?</a></li>
+            <li><a href="Odoo.html">SGE: "Odoo" </a></li>
+            <li><a href="instalacion.html">Instalación</a></li>
+            <li><a href="admin.html">Administración y configuración</a></li>
+            <li><a href="seguridad.html">Acceso seguro</a></li>
+            <li><a href="informes.html">Informes y exportación</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1>Elaboración de informes y exportación</h1>
+        <p>En Odoo, la elaboración de informes y la exportación de información son procesos clave para la gestión empresarial eficiente.</p>
+
+        <h1> Elaboracion Informes en Odoo: </h1>
+        <ul>
+            <li>Acceso a los informes: Dirígete al módulo correspondiente (Ventas, Compras, Contabilidad...)</li>
+            <li>Selección de datos: Filtra la información que deseas incluir en el informe.</li>
+            <li>Generación del informe: Usa las opciones de vista (lista, gráfico, tabla dinámica) para estructurar los datos.</li>
+            <li>Personalización: Ajusta los campos visibles y aplica agrupaciones o cálculos según sea necesario.</li>
+            <li>Exportación del informe: Descarga el informe en formatos como Excel o PDF para su análisis externo.</li>
+        </ul>
+
+        <br>
+        <br>
+
+        <h1> Exportacion Informes en Odoo: </h1>
+        <ul>
+            <li>Ir a la aplicación deseada: Accede al módulo donde se encuentran los datos que deseas exportar.</li>
+            <li>Seleccionar registros: Marca los datos específicos que quieres exportar.</li>
+            <li>Acceder a la opción de exportación: En el menú de acciones, selecciona "Exportar".</li>
+            <li>Elegir formato: Odoo permite exportar en formatos como CSV y Excel.</li>
+            <li>Descargar el archivo: Guarda el archivo en tu dispositivo para su uso posterior.</li>
+        </ul>
+
+        <br>
+
+        <p> Para tener una especie de guia, os dejo por aqui abajo dos enlacen para que copnsulteis de manera mas detallada la elaboracion e importacion de informesya que
+            simplemente explique de manera breve como debe acerse pero de una forma general, sin entrar mucho en detalle; por eso os dejo dichos enlaces para que sepais con 
+        mayor exactitud esta seccion </p>
+
+        <br>
+        <br>
+
+        <p><a href="https://www.garber.es/blog/odoo-8/exportar-e-importar-datos-en-odoo-553" target="_blank">Pagina Exportar e importar datos en Odoo </a></p>
+        <p><a href="https://www.youtube.com/watch?v=OIK72Z7d3DI" target="_blank"> Video Tutorial </a></p>
+
+        <br>
+        <br>
+
+    </main>
+    <footer>
+        <div class="enlaces">
+            <a href="https://www.instagram.com/odoo.official/" target="_blank">Instagram</a>
+            <a href="https://twitter.com/odoo" target="_blank">Twitter</a>
+            <a href="https://www.facebook.com/Odoo" target="_blank">Facebook</a>
+            <a href="https://www.youtube.com/user/OpenERPonline" target="_blank">YouTube</a>
+            <a href="https://www.odoo.com/es_ES" target="_blank">Odoo</a>
+        </div>
+        <div class="botones-navegacion" id="botones-navegacion">
+            <button id="go-back" title="Página anterior">←</button>
+            <button id="go-forward" title="Página siguiente">→</button>
+        </div>
+    </footer>
+    <script>
+        let paginas = ["index.html", "sge.html", "odoo.html", "instalacion.html", "admin.html", "seguridad.html", "informes.html"];
+        let localizacion = window.location.pathname.split('/').pop().toLowerCase();
+        let idx = paginas.indexOf(localizacion);
+
+        document.getElementById('go-back').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let prevIdx = (idx - 1 + paginas.length) % paginas.length;
+                window.location.href = paginas[prevIdx];
+            }
+        };
+        document.getElementById('go-forward').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let nextIdx = (idx + 1) % paginas.length;
+                window.location.href = paginas[nextIdx];
+            }
+        };
+
+        const menuToggle = document.getElementById('mobile-menu');
+        const nav = document.querySelector('nav');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+        
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>

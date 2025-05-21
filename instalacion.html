@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/instalacion.css">
+    <title>Instalación del SGE</title>
+</head>
+<body>
+    <header id="header" class="header">
+        Sitio Web con información sobre Insalación y Uso de un SGE
+    </header>
+
+    <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+    </div>
+
+    <nav id="nav" class="nav">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="sge.html">¿Qué es un SGE?</a></li>
+            <li><a href="Odoo.html">SGE: "Odoo" </a></li>
+            <li><a href="instalacion.html">Instalación</a></li>
+            <li><a href="admin.html">Administración y configuración</a></li>
+            <li><a href="seguridad.html">Acceso seguro</a></li>
+            <li><a href="informes.html">Informes y exportación</a></li>
+        </ul>
+    </nav>
+    <main id="main" class="main">
+        <h1>Instalación del SGE</h1>
+        <p>En esta seccion de la pagina vamos a ver como funciona la instalacion de nuestro SGE "Odoo".
+        <br> Vamos a ver paso por paso como debemos de instalarlo para que heche a funcionar; IMPORTANTE: esto es un sistema que se abre de manera local en tu navegador. </p>
+        </p>
+
+        <h1> Pasos a seguir: </h1>
+
+        <br>
+        <br>
+
+        <img src="./IMG/Instalacion_Odoo/Screenshot_1.png" alt="1">
+        <p> Descargamos el ".exe" que se encuentra en su pagina oficial y le daremos cliclk parqa que se ejecute y podamos empezar la instalacion</p>
+        
+        <br>
+        <br>
+
+        <img src="./IMG/Instalacion_Odoo/Screenshot_2.png" alt="2">
+        <p> Al ejecutarlo nos encontraremos primeramente con la ventana de selector de idioma; esta nos dara dos opciones: Ingles o Frances </p>
+        
+        <br>
+        <br>
+
+        <img src="./IMG/Instalacion_Odoo/Screenshot_3.png" alt="3">
+        <p> Despues de seleccionar el idioma, que en nuestro caso sera el Ingles, ya empezara lo que se conoce como "SetUp" del sistema Odoo. 
+            <br>
+            Daremos todo siguiente dejando los valores predeterminados hasta que lleguemos a la ventana de configurar la informacion donde nos pedira el nombre del HostName, 
+            el mpuerto, el usuario y la contrtaseña.
+        </p>
+        
+        <br>
+        <br>
+
+        <img src="./IMG/Instalacion_Odoo/Screenshot_4.png" alt="4">
+        <p> Esta es la ventana de la que estaba hablando antes, cuando lleguemos aqui solo tocaremos el usuario y la contraseña que nostreos querramos tener y los demas valores 
+            los dejaremos predeterminados </p>
+            
+        <br>
+        <br>
+
+        <img src="./IMG/Instalacion_Odoo/Screenshot_5.png" alt="5">
+        <p> Aqui elegimos donde queremos que se instale, en mi caso e dejado el que me da predeterminadamente.
+            <br> Una vez hecho todo esto le daremos al boton de instalar y comenzara la descarga y ahora es simplemente esperar a que se instale todo. </p>
+        
+        <br>
+        <br>
+
+        <img src="./IMG/Instalacion_Odoo/Screenshot_6.png" alt="6">
+        <img src="./IMG/Instalacion_Odoo/Screenshot_7.png" alt="7">
+        <img src="./IMG/Instalacion_Odoo/Screenshot_8.png" alt="8">
+        <img src="./IMG/Instalacion_Odoo/Screenshot_9.png" alt="9">
+        <img src="./IMG/Instalacion_Odoo/Screenshot_10.png" alt="10">
+        <img src="./IMG/Instalacion_Odoo/Screenshot_11.png" alt="11">
+        <p> Cuando termine la instalacion le daremos que la casilla de que queremos que arranque Odoo justo cuando le demos a terminar </p>
+
+        <br>
+        <br>
+
+        <img src="./IMG/Instalacion_Odoo/Screenshot_14.png" alt="14">
+        <p> Cuando arranque Odoo lo hara desde el navegador tal y como hemos comentado anteriormente y ahora vamos a tener que asignar contraseñas, nombres, nombre de 
+            nuestra base de datos, numero de telefono, pais, idioma y correo </p>
+
+        <br>
+        <br>
+
+        <img src="./IMG/Instalacion_Odoo/Screenshot_15.png" alt="15">
+        <p> Si lo hicimos todo bien, introduciremos el correo que hemos seleccionado y la contraseña elegida y ya podremos acceder a Odoo, nuestro Sistema de Gestion Empresarial </p>
+
+        <br>
+        <br>
+
+        <img src="./IMG/Instalacion_Odoo/Screenshot_16.png" alt="16">
+
+        
+
+    </main>
+    <footer id="footer" class="footer">
+        <div class="enlaces">
+            <a href="https://www.instagram.com/odoo.official/" target="_blank">Instagram</a>
+            <a href="https://twitter.com/odoo" target="_blank">Twitter</a>
+            <a href="https://www.facebook.com/Odoo" target="_blank">Facebook</a>
+            <a href="https://www.youtube.com/user/OpenERPonline" target="_blank">YouTube</a>
+            <a href="https://www.odoo.com/es_ES" target="_blank">Odoo</a>
+        </div>
+        <div class="botones-navegacion" id="botones-navegacion">
+            <button id="go-back" title="Página anterior">←</button>
+            <button id="go-forward" title="Página siguiente">→</button>
+        </div>
+    </footer>
+    <script>
+        let paginas = ["index.html", "sge.html", "odoo.html", "instalacion.html", "admin.html", "seguridad.html", "informes.html"];
+        let localizacion = window.location.pathname.split('/').pop().toLowerCase();
+        let idx = paginas.indexOf(localizacion);
+
+        document.getElementById('go-back').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let prevIdx = (idx - 1 + paginas.length) % paginas.length;
+                window.location.href = paginas[prevIdx];
+            }
+        };
+        document.getElementById('go-forward').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let nextIdx = (idx + 1) % paginas.length;
+                window.location.href = paginas[nextIdx];
+            }
+        };
+
+        const menuToggle = document.getElementById('mobile-menu');
+        const nav = document.querySelector('nav');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+        
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+    </script>
+</html>

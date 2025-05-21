@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/seguridad.css">
+    <title>Acceso seguro</title>
+</head>
+<body>
+    <header id="header">
+        Sitio Web con información sobre Insalación y Uso de un SGE
+    </header>
+
+    <div class="menu-toggle" id="mobile-menu">
+        <span></span>
+    </div>
+
+    <nav id="nav">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="sge.html">¿Qué es un SGE?</a></li>
+            <li><a href="Odoo.html">SGE: "Odoo" </a></li>
+            <li><a href="instalacion.html">Instalación</a></li>
+            <li><a href="admin.html">Administración y configuración</a></li>
+            <li><a href="seguridad.html">Acceso seguro</a></li>
+            <li><a href="informes.html">Informes y exportación</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1>Acceso seguro</h1>
+        <p> Odoo tiene uin sistema de acceso super rapido y super simple.
+            <br> A parte de explicar la opcion que tiene de acceso seguro, tambien crearemos un par de usuarios y una nueva compañia </p>
+        
+        <img src="./IMG/AccesoSeguro_Odoo/Screenshot_1.png" alt="1">
+        <p> Esta es la parte de usuario, le vamos a dar a nuevo y empezaremos a ver como y que tiene un usuario en Odoo </p>
+
+        <br>
+        <br>
+
+        <img src="./IMG/AccesoSeguro_Odoo/Screenshot_2.png" alt="2">
+        <p> Primero de todo, este es nuestro usuario Administrador, con este usuario tenemos total acceso a la configuracion al sistema Odoo.
+            <br> Podemos observar que las opciones de acceso que nos da son simplemente dos, permisos de acceso; esta lo unico que te permite es acceder a Odoo sin posibilidad
+                de modificar nada mientras que la otra opcion; ajustes, te permite acceder a Odoo con libre acceso y poder modificar lo que nosotros queramos desde activar/instalar apps
+                controlar los ajustes de los usuarios y las compañias; basicamente, un Administrador </p>
+
+        <br>
+        <br>
+
+        <img src="./IMG/AccesoSeguro_Odoo/Screenshot_3.png" alt="3">
+        <img src="./IMG/AccesoSeguro_Odoo/Screenshot_4.png" alt="4">
+        <img src="./IMG/AccesoSeguro_Odoo/Screenshot_7.png" alt="7">
+        <img src="./IMG/AccesoSeguro_Odoo/Screenshot_8.png" alt="8">
+        <img src="./IMG/AccesoSeguro_Odoo/Screenshot_9.png" alt="9">
+        <p> Aqui configuramos dos usuarios llamados, Prueba1 y Pueba2.
+            <br> En los usuarios podemos tocar los permisos, luego en el apartado de preferencias tenemos el idioma, la zona horaria, la incorporacion y la firma electronica.
+            Si activamos la incorporacion se nos despliega otra ventana mas llamada seguridad de la cuenta dojnde activamos la verificacion por dos pasos, la primera por contraseña y
+            la segunda mediante un codigo.
+        </p>
+
+        <br>
+        <br>
+
+        <img src="./IMG/AccesoSeguro_Odoo/Screenshot_10.png" alt="10">
+        <img src="./IMG/AccesoSeguro_Odoo/Screenshot_11.png" alt="11">
+        <img src="./IMG/AccesoSeguro_Odoo/Screenshot_12.png" alt="12">
+        <p>En la parte de compañias es mucho mas sencillo, aqui solo nos deja modificar la direccion donde se encuentra nuestra compañia, el NIF, el ID de la compañia
+            las moneda que utiliza esta misma y para ponernios en contacto en algun momento como telefono, movil, correo electronico, el sitio web que tiene e incluso el color 
+        con el que queremos guardar dicha compañia </p>
+
+        <br>
+        <br>
+        
+    </main>
+    <footer>
+        <div class="enlaces">
+            <a href="https://www.instagram.com/odoo.official/" target="_blank">Instagram</a>
+            <a href="https://twitter.com/odoo" target="_blank">Twitter</a>
+            <a href="https://www.facebook.com/Odoo" target="_blank">Facebook</a>
+            <a href="https://www.youtube.com/user/OpenERPonline" target="_blank">YouTube</a>
+            <a href="https://www.odoo.com/es_ES" target="_blank">Odoo</a>
+        </div>
+        <div class="botones-navegacion" id="botones-navegacion">
+            <button id="go-back" title="Página anterior">←</button>
+            <button id="go-forward" title="Página siguiente">→</button>
+        </div>
+    </footer>
+    <script>
+        let paginas = ["index.html", "sge.html", "odoo.html", "instalacion.html", "admin.html", "seguridad.html", "informes.html"];
+        let localizacion = window.location.pathname.split('/').pop().toLowerCase();
+        let idx = paginas.indexOf(localizacion);
+
+        document.getElementById('go-back').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let prevIdx = (idx - 1 + paginas.length) % paginas.length;
+                window.location.href = paginas[prevIdx];
+            }
+        };
+        document.getElementById('go-forward').onclick = function() {
+            if (idx === -1) {
+                window.location.href = paginas[0];
+            } else {
+                let nextIdx = (idx + 1) % paginas.length;
+                window.location.href = paginas[nextIdx];
+            }
+        };
+
+        const menuToggle = document.getElementById('mobile-menu');
+        const nav = document.querySelector('nav');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+        
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>

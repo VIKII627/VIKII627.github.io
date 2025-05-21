@@ -32,7 +32,6 @@ nav {
     justify-content: center;
     padding: 0.5em 0;
 }
-
 nav ul {
     list-style: none;
     margin: 0;
@@ -40,7 +39,6 @@ nav ul {
     display: flex;
     gap: 2em;
 }
-
 nav ul li a {
     text-decoration: none;
     color: black;
@@ -49,7 +47,6 @@ nav ul li a {
     border-radius: 4px;
     transition: background-color 0.2s, color 0.2s;
 }
-
 nav ul li a:hover {
     background-color: black;
     color: white;
@@ -68,15 +65,6 @@ main {
     border-radius: 0;
     box-shadow: none;
 }
-
-p {
-    text-align: center;
-    font-size: 1.2em;
-    color: black;
-    font-weight: 400;
-    font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
-}
-
 h1 {
     font-size: 2.2em;
     margin-bottom: 0.5em;
@@ -86,7 +74,13 @@ h1 {
     letter-spacing: 1px;
     text-align: center;
 }
-
+p {
+    text-align: center;
+    font-size: 1.2em;
+    color: black;
+    font-weight: 400;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+}
 img {
     width: 700px;
     height: auto;
@@ -105,7 +99,6 @@ footer {
     align-items: center;
     padding: 1.5em 0 1em 0;
 }
-
 footer .enlaces {
     display: flex;
     flex-direction: row;
@@ -114,14 +107,12 @@ footer .enlaces {
     gap: 1.5em;
     margin-bottom: 0.7em;
 }
-
 footer a {
     color: white;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s;
 }
-
 footer a:hover {
     color: yellow;
 }
@@ -147,7 +138,6 @@ footer a:hover {
     z-index: 1000;
     position: relative;
 }
-
 .menu-toggle span {
     display: inline-block;
     width: 25px;
@@ -157,7 +147,6 @@ footer a:hover {
     position: relative;
     transition: all 0.3s ease;
 }
-
 .menu-toggle span::before,
 .menu-toggle span::after {
     content: '';
@@ -168,11 +157,9 @@ footer a:hover {
     left: 0;
     transition: all 0.3s ease;
 }
-
 .menu-toggle span::before {
     top: -8px;
 }
-
 .menu-toggle span::after {
     bottom: -8px;
 }
@@ -181,31 +168,25 @@ footer a:hover {
     main {
         margin: 50px;
     }
-    
     nav ul {
         gap: 1em;
     }
-    
     h1 {
         font-size: 1.8em;
     }
-    
     p {
         font-size: 1em;
     }
-    
     img {
         width: 550px;
         margin-top: 1em;
         box-shadow: 0 2px 8px black;
     }
-    
     footer .enlaces,
     .botones-navegacion {
         gap: 1em;
     }
 }
-
 @media screen and (max-width: 578px) {
     .menu-toggle {
         display: block;
@@ -214,7 +195,6 @@ footer a:hover {
         text-align: center;
         border-bottom: 1px solid lightgray;
     }
-    
     nav {
         position: fixed;
         top: 0;
@@ -228,19 +208,16 @@ footer a:hover {
         overflow-y: auto;
         padding-top: 60px;
     }
-    
     nav.active {
         left: 0;
         height: auto;
         max-height: 100vh;
     }
-    
     nav ul {
         flex-direction: column;
         padding: 20px 0;
         margin: 0;
     }
-    
     nav ul li a {
         display: block;
         padding: 12px 20px;
@@ -248,33 +225,26 @@ footer a:hover {
         font-size: 0.9em;
         text-decoration: none;
     }
-    
     nav ul li a:hover {
         background-color: whitesmoke;
     }
-    
     .menu-toggle.active span {
         background-color: transparent;
     }
-    
     .menu-toggle.active span::before {
         transform: rotate(45deg) translate(5px, 5px);
     }
-    
     .menu-toggle.active span::after {
         transform: rotate(-45deg) translate(5px, -5px);
     }
-    
     main {
         margin-top: 60px;
     }
 }
-
 @media screen and (max-width: 578px) {
     main {
         margin-top: 20px;
     }
-    
     header {
         position: relative;
     }

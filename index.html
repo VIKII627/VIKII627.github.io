@@ -57,7 +57,7 @@
         let idx = paginas.indexOf(localizacion);
 
         document.getElementById('go-back').onclick = function() {
-            if (idx === -1) {
+            if (idx == -1) {
                 window.location.href = paginas[0];
             } else {
                 let prevIdx = (idx - 1 + paginas.length) % paginas.length;
@@ -65,7 +65,7 @@
             }
         };
         document.getElementById('go-forward').onclick = function() {
-            if (idx === -1) {
+            if (idx == -1) {
                 window.location.href = paginas[0];
             } else {
                 let nextIdx = (idx + 1) % paginas.length;

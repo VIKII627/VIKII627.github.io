@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora y Registro Fitness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <section class="macronutrientes">
+            <h1>Calculadora de Macronutrientes</h1>
+            <p>Estime su ingesta diaria ideal para el aumento de masa muscular.</p>
+            
+            <form action="calcular.php" method="POST">
+                <div class="form-group">
+                    <label for="peso">Peso Corporal Total (en kg):</label>
+                    <input type="number" id="peso" name="peso" step="0.1" min="1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="grasa_corporal">Porcentaje de Grasa Corporal (%):</label>
+                    <input type="number" id="grasa_corporal" name="grasa_corporal" step="0.1" min="1" max="60" required>
+                </div>
+
+                <button type="submit">Calcular Ingesta Diaria</button>
+            </form>
+        </section>
+
+        <hr class="separator">
+
+        <section class="entrenamiento">
+            <h1>Registro de Entrenamiento</h1>
+            <p>Registre el peso y las repeticiones de los ejercicios que realiza.</p>
+            
+            <form id="registro-form">
+                <div id="ejercicios-container">
+                    </div>
+                
+                <button type="button" id="add-ejercicio" class="secundario">Añadir Ejercicio</button>
+                <button type="button" id="reset-registro" class="secundario">Borrar Registro</button>
+            </form>
+        </section>
+
+    </div>
+
+    <script>
+        const container = document.getElementById('ejercicios-container');
+        const registroForm = document.getElementById('registro-form');
+        const addEjercicioBtn = document.getElementById('add-ejercicio');
+        const resetRegistroBtn = document.getElementById('reset-registro');
+
+        function createExerciseRow(ejercicio = '', peso = '', repeticiones = '') {
+            const newRow = document.createElement('div');
+            newRow.className = 'ejercicio-row';
+            newRow.innerHTML = `
+                <input type="text" name="ejercicio[]" placeholder="Máquina/Ejercicio" value="${ejercicio}" required>
+                <input type="number" name="peso[]" placeholder="Peso (kg)" value="${peso}" min="1" required>
+                <input type="number" name="repeticiones[]" placeholder="Reps" value="${repeticiones}" min="1" required>
+                <button type="button" class="remove-ejercicio secundario">X</button>
+            `;
+            
+            newRow.querySelector('.remove-ejercicio').addEventListener('click', function() {
+                newRow.remove();
+                saveRegistry();
+            });
+
+            return newRow;
+        }
+
+        function saveRegistry() {
+            const rows = container.querySelectorAll('.ejercicio-row');
+            const data = [];
+            rows.forEach(row => {
+                const inputs = row.querySelectorAll('input');
+                data.push({
+                    ejercicio: inputs[0].value,
+                    peso: inputs[1].value,
+                    repeticiones: inputs[2].value
+                });
+            });
+            localStorage.setItem('entrenamientoRegistro', JSON.stringify(data));
+        }
+
+        function loadRegistry() {
+            const savedData = localStorage.getItem('entrenamientoRegistro');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                if (data.length > 0) {
+                    data.forEach(item => {
+                        container.appendChild(createExerciseRow(item.ejercicio, item.peso, item.repeticiones));
+                    });
+                } else {
+                    container.appendChild(createExerciseRow());
+                }
+            } else {
+                container.appendChild(createExerciseRow());
+            }
+        }
+
+        loadRegistry();
+
+        registroForm.addEventListener('input', saveRegistry);
+
+        addEjercicioBtn.addEventListener('click', function() {
+            container.appendChild(createExerciseRow());
+            saveRegistry();
+        });
+        
+        resetRegistroBtn.addEventListener('click', function() {
+            if (confirm('¿Está seguro de que desea borrar todo el registro de entrenamiento?')) {
+                localStorage.removeItem('entrenamientoRegistro');
+                container.innerHTML = '';
+                loadRegistry();
+            }
+        });
+    </script>
+</body>
+</html>

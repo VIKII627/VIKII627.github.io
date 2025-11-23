@@ -16,7 +16,7 @@
             <h1>Calculadora de Macronutrientes</h1>
             <p>Estime su ingesta diaria ideal para el aumento de masa muscular.</p>
             
-            <form action="calcular.php" method="POST">
+            <form id="macronutrientes-form">
                 <div class="form-group">
                     <label for="peso">Peso Corporal Total (en kg):</label>
                     <input type="number" id="peso" name="peso" step="0.1" min="1" required>
@@ -29,6 +29,9 @@
 
                 <button type="submit">Calcular Ingesta Diaria</button>
             </form>
+            
+            <div id="resultado-macronutrientes" style="display: none;">
+                </div>
         </section>
 
         <hr class="separator">
@@ -117,6 +120,58 @@
                 container.innerHTML = '';
                 loadRegistry();
             }
+        });
+
+        const macroForm = document.getElementById('macronutrientes-form');
+        const resultadoDiv = document.getElementById('resultado-macronutrientes');
+        const pesoInput = document.getElementById('peso');
+        const grasaInput = document.getElementById('grasa_corporal');
+
+        macroForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const peso = parseFloat(pesoInput.value);
+            const grasa_corporal = parseFloat(grasaInput.value);
+            let htmlResultado = '';
+
+            if (isNaN(peso) || peso <= 0) {
+                htmlResultado = `
+                    <div class="resultado error">
+                        <p>Por favor, introduzca un peso válido (en kg).</p>
+                    </div>`;
+            } else if (isNaN(grasa_corporal) || grasa_corporal <= 0 || grasa_corporal >= 100) {
+                htmlResultado = `
+                    <div class="resultado error">
+                        <p>Por favor, introduzca un porcentaje de grasa corporal válido (entre 1 y 99).</p>
+                    </div>`;
+            } else {
+                const grasa_kg = peso * (grasa_corporal / 100);
+                const mcm = peso - grasa_kg;
+                
+                const proteina_gramos = (mcm * 2.2).toFixed(1); 
+                
+                const carbo_gramos = (peso * 5.0).toFixed(1);
+                
+                htmlResultado = `
+                    <div class="resultado exito">
+                        <p>Basado en **${peso} kg** y **${grasa_corporal}%** de grasa corporal:</p>
+                        <p class="nota-mcm">Su Masa Corporal Magra (MCM) es de: **${mcm.toFixed(1)} kg**</p>
+                        
+                        <hr class="thin-separator">
+                        
+                        <h2>Proteína Diaria (MCM x 2.2 g):</h2>
+                        <p class="calculo exito-num">${proteina_gramos} **gramos**</p>
+                        
+                        <h2>Carbohidratos Diarios (Peso x 5.0 g):</h2>
+                        <p class="calculo exito-num">${carbo_gramos} **gramos**</p>
+                        
+                        <p class="nota">Estos son objetivos recomendados para el aumento de masa muscular.</p>
+                    </div>
+                `;
+            }
+
+            resultadoDiv.innerHTML = htmlResultado;
+            resultadoDiv.style.display = 'block';
         });
     </script>
 </body>

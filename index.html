@@ -8,6 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .resultado-imc .nota { font-size: 0.9em; margin-top: 10px; }
+        .imc-result-text { font-weight: bold; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -18,8 +22,8 @@
             
             <form id="macronutrientes-form">
                 <div class="form-group">
-                    <label for="peso">Peso Corporal Total (en kg):</label>
-                    <input type="number" id="peso" name="peso" step="0.1" min="1" required>
+                    <label for="peso_macro">Peso Corporal Total (en kg):</label>
+                    <input type="number" id="peso_macro" name="peso_macro" step="0.1" min="1" required>
                 </div>
                 
                 <div class="form-group">
@@ -31,11 +35,34 @@
             </form>
             
             <div id="resultado-macronutrientes" style="display: none;">
-                </div>
+            </div>
         </section>
 
         <hr class="separator">
 
+        <section class="imc">
+            <h1>Calculadora de Índice de Masa Corporal (IMC) 🍎</h1>
+            <p>Estime su IMC basado en su peso y altura.</p>
+            
+            <form id="imc-form">
+                <div class="form-group">
+                    <label for="altura_imc">Altura (en metros, ej: 1.75):</label>
+                    <input type="number" id="altura_imc" name="altura_imc" step="0.01" min="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="peso_imc">Peso (en kilogramos):</label>
+                    <input type="number" id="peso_imc" name="peso_imc" step="0.1" min="1" required>
+                </div>
+
+                <button type="submit">Calcular IMC</button>
+            </form>
+            
+            <div id="resultado-imc" style="display: none;">
+            </div>
+        </section>
+
+        <hr class="separator">
+        
         <section class="entrenamiento">
             <h1>Registro de Entrenamiento</h1>
             <p>Registre el peso y las repeticiones de los ejercicios que realiza.</p>
@@ -52,6 +79,7 @@
     </div>
 
     <script>
+
         const container = document.getElementById('ejercicios-container');
         const registroForm = document.getElementById('registro-form');
         const addEjercicioBtn = document.getElementById('add-ejercicio');
@@ -122,15 +150,16 @@
             }
         });
 
+
         const macroForm = document.getElementById('macronutrientes-form');
-        const resultadoDiv = document.getElementById('resultado-macronutrientes');
-        const pesoInput = document.getElementById('peso');
+        const resultadoMacroDiv = document.getElementById('resultado-macronutrientes');
+        const pesoMacroInput = document.getElementById('peso_macro'); // ID cambiado
         const grasaInput = document.getElementById('grasa_corporal');
 
         macroForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const peso = parseFloat(pesoInput.value);
+            const peso = parseFloat(pesoMacroInput.value);
             const grasa_corporal = parseFloat(grasaInput.value);
             let htmlResultado = '';
 
@@ -170,9 +199,68 @@
                 `;
             }
 
-            resultadoDiv.innerHTML = htmlResultado;
-            resultadoDiv.style.display = 'block';
+            resultadoMacroDiv.innerHTML = htmlResultado;
+            resultadoMacroDiv.style.display = 'block';
         });
+
+
+        const imcForm = document.getElementById('imc-form');
+        const resultadoIMC = document.getElementById('resultado-imc');
+        const alturaInput = document.getElementById('altura_imc');
+        const pesoInput = document.getElementById('peso_imc');
+
+        function obtenerClasificacionIMC(imc) {
+            if (imc < 18.5) {
+                return { clasificacion: 'Peso Insuficiente', clase: 'error' };
+            } else if (imc >= 18.5 && imc <= 24.9) {
+                return { clasificacion: 'Peso Normal', clase: 'exito' };
+            } else if (imc >= 25.0 && imc <= 29.9) {
+                return { clasificacion: 'Sobrepeso', clase: 'advertencia' };
+            } else if (imc >= 30.0 && imc <= 34.9) {
+                return { clasificacion: 'Obesidad Grado I', clase: 'error' };
+            } else if (imc >= 35.0 && imc <= 39.9) {
+                return { clasificacion: 'Obesidad Grado II (Severa)', clase: 'error' };
+            } else {
+                return { clasificacion: 'Obesidad Grado III (Mórbida)', clase: 'error' };
+            }
+        }
+
+        imcForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const altura = parseFloat(alturaInput.value);
+            const peso = parseFloat(pesoInput.value);
+            let htmlResultado = '';
+
+            if (isNaN(altura) || altura <= 0 || isNaN(peso) || peso <= 0) {
+                htmlResultado = `
+                    <div class="resultado error">
+                        <p>Por favor, introduzca valores válidos para altura y peso.</p>
+                    </div>`;
+            } else {
+                const imc = peso / (altura * altura);
+                const clasificacionData = obtenerClasificacionIMC(imc);
+
+                htmlResultado = `
+                    <div class="resultado resultado-imc ${clasificacionData.clase}">
+                        <p>Con un peso de **${peso} kg** y una altura de **${altura} m**:</p>
+                        
+                        <hr class="thin-separator">
+                        
+                        <h2>Su Índice de Masa Corporal (IMC) es:</h2>
+                        <p class="calculo exito-num">${imc.toFixed(2)}</p>
+                        
+                        <p>Clasificación: <span class="imc-result-text">${clasificacionData.clasificacion}</span></p>
+                        
+                        <p class="nota">Recuerde que el IMC es solo una herramienta de estimación y no considera la composición corporal (músculo vs. grasa).</p>
+                    </div>
+                `;
+            }
+
+            resultadoIMC.innerHTML = htmlResultado;
+            resultadoIMC.style.display = 'block';
+        });
+
     </script>
 </body>
 </html>
